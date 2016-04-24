@@ -6,11 +6,13 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-public class CSVApacheParserTest {
+import com.xtracta.supplier.XtractaTest;
+
+public class CSVApacheParserTest extends XtractaTest{
 	@Test
 	public void canParseFirstLineOfSuppliers(){
 		try {
-			CSVApacheParser parser = new CSVApacheParser("/home/firas/xtracta/multiStringMatching/instructions/suppliernames.txt");
+			CSVApacheParser parser = new CSVApacheParser(TEST_SUPPLIER_FILE);
 			Assert.assertTrue(parser.hasNext());
 			Assert.assertEquals("Blue NRG Pty Ltd", parser.getNextSupplierName());
 			
@@ -21,7 +23,7 @@ public class CSVApacheParserTest {
 	@Test
 	public void canParseWholeFile(){
 		try {
-			CSVApacheParser parser = new CSVApacheParser("/home/firas/xtracta/multiStringMatching/instructions/suppliernames.txt");
+			CSVApacheParser parser = new CSVApacheParser(TEST_SUPPLIER_FILE);
 
 			int lineCount = 0;
 			for(;parser.hasNext(); ++lineCount) parser.getNextSupplierName();
