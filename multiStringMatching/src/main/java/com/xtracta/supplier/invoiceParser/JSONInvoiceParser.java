@@ -84,20 +84,21 @@ public class JSONInvoiceParser extends AbstractInvoiceParser {
 	
 	public ArrayList<String> parse(){
 		ArrayList<InvoiceRecord> invoiceRecords = order();
-		int invoiceSize = (Integer)invoiceRecords.get(invoiceRecords.size() - 1).get(JSON_TAGS.line_id);
-		ArrayList<String> parsedInvoice = new ArrayList<String>(invoiceSize);
-		int lineNumber = 0;
+		long invoiceSize = (Long)invoiceRecords.get(invoiceRecords.size() - 1).get(JSON_TAGS.line_id);
+		ArrayList<String> parsedInvoice = new ArrayList<String>( (int)invoiceSize);
+		long lineNumber = 0;
 		StringBuilder currentString = new StringBuilder();
 		for(int i = 0; i < invoiceRecords.size(); ++i){
 			InvoiceRecord record = invoiceRecords.get(i);
-			if( (Integer)record.get(JSON_TAGS.line_id) != lineNumber){
+			if( (Long)record.get(JSON_TAGS.line_id) != lineNumber){
 				parsedInvoice.add(currentString.toString());
 				currentString.setLength(0);
-				lineNumber = (Integer)record.get(JSON_TAGS.line_id);
+				lineNumber = (Long)record.get(JSON_TAGS.line_id);
 			}
 			if(currentString.length() > 0) currentString.append(' ');
 			currentString.append(record.get(JSON_TAGS.word));
 		}
+		if(currentString.length() > 0) parsedInvoice.add(currentString.toString());
 		return parsedInvoice;
 	}
 }

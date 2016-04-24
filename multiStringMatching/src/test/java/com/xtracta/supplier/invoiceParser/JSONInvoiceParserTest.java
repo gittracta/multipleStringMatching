@@ -40,4 +40,11 @@ public class JSONInvoiceParserTest extends XtractaTest{
     	Assert.assertEquals( (long)2, record.get(JSON_TAGS.line_id));
     	Assert.assertEquals( (long)0, record.get(JSON_TAGS.pos_id));
     }
+    @Test 
+    public void canParse(){
+    	JSONInvoiceParser parser = new JSONInvoiceParser(TEST_INVOICE_FILE);
+    	ArrayList<String> invoice = parser.parse();
+    	Assert.assertEquals("(PI INVOICE", invoice.get(0));
+    	Assert.assertEquals("An invoice footer can go here", invoice.get(invoice.size() - 1));
+    }
 }
