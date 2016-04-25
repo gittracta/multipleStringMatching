@@ -24,6 +24,7 @@ public class AhoCorasickMultipleStringMatchingRobertBorImpl extends
 	
 	public String findMatch(String textToSearch){
 		Emit emit = trie.firstMatch(textToSearch);
+		if(emit == null) return null;
 		return emit.getKeyword();
 	}
 }
