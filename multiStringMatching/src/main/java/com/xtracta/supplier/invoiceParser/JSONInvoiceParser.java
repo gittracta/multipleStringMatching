@@ -6,18 +6,19 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumMap;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
- * This class parses invoice text using the JSON.simple library. This library provides a reasonable balance between ease-of-use and performance
+ * This class parses invoice file using the <code> JSON.simple </code> library. This library provides a reasonable balance between ease-of-use and performance
  * The invoice as assumed to be a Python output (a format very similar to JSON, with the exception that fields are wrapped by single quotes rather
  * than double quotes).
  * Each entry in the file is assumed to contain all the tags as defined in {@link JSON_TAGS}
+ * The invoice file contains entries representing words on different pages, lines, and line-positions. The {@link #parse()} method of 
+ * this class extract this information from each entry, orders the resulting records according to pages, lines, and line-positions,
+ * and eventually builds strings out of words residing on the same line according to their order as specified by line-positions.
  * @see <a href="http://blog.takipi.com/the-ultimate-json-library-json-simple-vs-gson-vs-jackson-vs-json/">comparison benchmark</a>
  * @see JSON_TAGS
  * @see InvoiceRecord
