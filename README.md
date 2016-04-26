@@ -34,6 +34,7 @@ The program is configured to be built with gradle. Example gradle tasks:
 The program uses the Aho-Corasick algorithm to efficienty solve the string search problem with multiple patterns.
 This allows the program to run on hundreds of thousands of supplier names as requested, and even to scale
 beyond that using cluster friendly implementations of the algorithm.
+Currently the code returns only the first supplier name that matches the invoice. However, it can be readily modified to return all matches.
 More in depth information is provided in the javadoc / source code.
 
 # Dependencies
