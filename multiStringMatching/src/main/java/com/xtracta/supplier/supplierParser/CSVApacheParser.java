@@ -20,6 +20,12 @@ public class CSVApacheParser extends AbstractSupplierParser {
 	private static final String SUPPLIER_NAME = "SupplierName";
 	private Iterator<CSVRecord> iterator;
 
+	/**
+	 * Reads the supplier names from the given CSV file.
+	 * The parsing is done using <a href="https://commons.apache.org/proper/commons-csv/"> Apache Commons CSV</a>
+	 * @param filePath path to the CSV file
+	 * @throws IOException in case of error parsing the file
+	 */
 	public CSVApacheParser(String filePath) throws IOException{
 		Reader in = new FileReader(filePath);
 		CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(in);

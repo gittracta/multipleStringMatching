@@ -24,14 +24,32 @@ public class JSONInvoiceParser extends AbstractInvoiceParser {
 	private BufferedReader br = null;
 	private ArrayList<InvoiceRecord> invoice = null;
 	
+	/**
+	 * Parsing the invoice is done by utilizing the <a href="https://github.com/fangyidong/json-simple"> JSON-simple library </a>
+	 * The format of the invoice is almost JSON-compatible, with the one exception 
+	 * that the fields are wrapped by single quote "'" instead of double quote
+	 * '"' as required by the JSON standard. Hence, single quotes are 
+	 * replaced with double quotes before passing the reconds to the 
+	 * JSON parser. This results in the limitation that supplier names
+	 * cannot contain a single quote
+	 * @param filePath parse the file at the given path
+	 * @throws IOException in case of IO errors
+	 */
 	public JSONInvoiceParser(String filePath) throws IOException{
 		br = new BufferedReader(new FileReader(filePath));
 	}
 	/**
+	 * Gets next record from invoice file. The records are assumed to 
+	 * of JSON format, up to having a single quote "'" around their fields
+	 * rather than double quotes '"'.
+	 * <p/>
+	 * To enable the JSON library to parse the records, the single quotes 
+	 * are replaced with double quotes.
+	 * <p/>
+	 * This results in the limitation that supplier names cannot have
+	 * single quotes in them
 	 * 
-	 * @return an <code> EnumMap </code> over <code> AbstractInvoiceParser.JSON_TAGS </code> with the corresponding values of the tags
-	 * in the next line. <code> null </code> returned in case end of file reached, in case of an exception
-	 * or in case the file is empty or could not be opened for reading
+	 * @return the next record or <code> null </code> otherwise
 	 */
 	public InvoiceRecord next(){
 		if(br == null) return null;
@@ -60,7 +78,7 @@ public class JSONInvoiceParser extends AbstractInvoiceParser {
 	/**
 	 * order the invoice records according to their <code>JSON_TAGS.page_id </code>, <code>JSON_TAGS.line_id </code>, and
 	 * <code> JSON_TAGS.pos_id </code> correspondingly
-	 * @return an array of ordered records 
+	 * @return an array of ordered records
 	 */
 	public ArrayList<InvoiceRecord> order(){
 		if(invoice != null) return invoice;

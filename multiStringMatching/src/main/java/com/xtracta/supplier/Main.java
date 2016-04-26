@@ -50,6 +50,10 @@ public class Main {
 
 	}
 
+	/**
+	 * build the command line options
+	 * @return the options allowed on the command line
+	 */
 	private static Options buildCommandLineOptions() {
 		Options options = new Options();
 
