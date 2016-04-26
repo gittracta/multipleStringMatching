@@ -24,14 +24,8 @@ public class JSONInvoiceParser extends AbstractInvoiceParser {
 	private BufferedReader br = null;
 	private ArrayList<InvoiceRecord> invoice = null;
 	
-	public JSONInvoiceParser(String filePath){
-		try {
-			br = new BufferedReader(new FileReader(filePath));
-		}
-		catch(IOException e){
-			e.printStackTrace();
-			br = null;
-		}
+	public JSONInvoiceParser(String filePath) throws IOException{
+		br = new BufferedReader(new FileReader(filePath));
 	}
 	/**
 	 * 

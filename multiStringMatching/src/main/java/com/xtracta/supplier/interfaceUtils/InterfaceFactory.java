@@ -16,7 +16,7 @@ public class InterfaceFactory {
 		return new CSVApacheParser(supplierPath);
 	}
 	
-	static public Invoice getDetaultInvoice(String invoicePath){
+	static public Invoice getDetaultInvoice(String invoicePath) throws IOException{
 		return new JSONInvoiceParser(invoicePath);
 	}
 }
