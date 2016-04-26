@@ -15,7 +15,12 @@ import org.json.simple.parser.ParseException;
 
 /**
  * This class parses invoice text using the JSON.simple library. This library provides a reasonable balance between ease-of-use and performance
+ * The invoice as assumed to be a Python output (a format very similar to JSON, with the exception that fields are wrapped by single quotes rather
+ * than double quotes).
+ * Each entry in the file is assumed to contain all the tags as defined in {@link JSON_TAGS}
  * @see <a href="http://blog.takipi.com/the-ultimate-json-library-json-simple-vs-gson-vs-jackson-vs-json/">comparison benchmark</a>
+ * @see JSON_TAGS
+ * @see InvoiceRecord
  * @author firas
  *
  */
@@ -29,9 +34,11 @@ public class JSONInvoiceParser extends AbstractInvoiceParser {
 	 * The format of the invoice is almost JSON-compatible, with the one exception 
 	 * that the fields are wrapped by single quote "'" instead of double quote
 	 * '"' as required by the JSON standard. Hence, single quotes are 
-	 * replaced with double quotes before passing the reconds to the 
+	 * replaced with double quotes before passing the records to the 
 	 * JSON parser. This results in the limitation that supplier names
-	 * cannot contain a single quote
+	 * cannot contain a single quote.
+	 * Each record in the invoice is assumed to contain all the tags as specified in 
+	 * {@link JSON_TAGS}
 	 * @param filePath parse the file at the given path
 	 * @throws IOException in case of IO errors
 	 */

@@ -10,6 +10,8 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 /**
  * Uses CSV apache to parse CSV supplier file. The parsing is done iteratively to avoid reading a big file into memory
+ * The CSV file as assumed to have a header equal to "Id,SupplierName". Each CSV entry is assumed to contain two fields
+ * a number and the supplier name
  * @see <a href="https://commons.apache.org/proper/commons-csv/">Commons CSV</a>
  * @author firas
  *
